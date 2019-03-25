@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <div class="form-group position-relative" *ngFor="let one of formElements.elements">
+        <label [for]="one.id" class="w-100 mb-2">{{one.title}}</label>
+        <input [ngClass]="{ 'is-invalid': submitted && f[one.formControlName].errors }"
+               *ngIf="one.typeElement === 'input'" [name]="one.name" [type]="one.element.type" class="form-control"
+               [id]="one.id" [formControlName]="one.formControlName" [placeholder]="one.element.placeholder">
+        <select [ngClass]="{ 'is-invalid': submitted && f[one.formControlName].errors }"
+                *ngIf="one.typeElement === 'select'" [name]="one.name" [id]="one.id" class="form-control"
+                [formControlName]="one.formControlName">
+          <option *ngFor="let option of one.element.options" [value]="option.value">{{option.title}}</option>
+        </select>
+        <textarea [ngClass]="{ 'is-invalid': submitted && f[one.formControlName].errors }"
+                  *ngIf="one.typeElement === 'textarea'" [name]="one.name" [id]="one.id" class="form-control"
+                  [formControlName]="one.formControlName"></textarea>
+        <div *ngIf="submitted && f[one.formControlName].errors" class="invalid-tooltip">
+          <span *ngIf="f[one.formControlName].errors['required']">{{one.title}} is required</span>
+          <span *ngIf="f[one.formControlName].errors['minLength']">{{one.title}} must be at
+            least {{one.validators.minLength}} characters
+          </span>
+          <span *ngIf="f[one.formControlName].errors['maxLength']">{{one.title}} must be
+            maximum {{one.validators.maxLength}} characters
+          </span>
+          <span *ngIf="f[one.formControlName].errors['pattern']">{{one.title}} must be a valid</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+  </div>
+</div>

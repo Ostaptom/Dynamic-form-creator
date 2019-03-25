@@ -1,0 +1,9 @@
+@import "~src/styles/base/animations";
+
+@mixin border($weight, $color) {
+  border: $weight solid $color !important;
+}
+
+@mixin animation-fade-in($duration) {
+  animation: fade-in $duration linear;
+}

@@ -1,0 +1,5 @@
+@import "~src/styles/mixins/mixin";
+
+.tab {
+  @include animation-fade-in(.3s);
+}
